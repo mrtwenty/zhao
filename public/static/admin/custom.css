@@ -1,0 +1,168 @@
+.layui-layout-min .layui-logo {
+    width: 55px;
+    overflow: hidden;
+}
+
+.layui-layout-min .layui-layout-left {
+    left: 35px;
+}
+
+.layui-layout-min .layui-side,
+.layui-layout-min .layui-nav-tree {
+    width: 55px;
+}
+
+.layui-layout-min .layui-body,
+.layui-layout-min .layui-footer {
+    left: 55px;
+}
+
+.layui-layout-min .layui-nav-tree cite,
+.layui-layout-min .layui-nav-tree .layui-nav-more {
+    display: none;
+}
+
+.hs-iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.layui-tab {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.layui-tab-content {
+    padding: 0 0 0 10px;
+    height: 100%;
+}
+
+.layui-tab-item {
+    height: 100%;
+    padding-right: 20px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 998;
+}
+
+.zhao-iframe {
+    /*-webkit-overflow-scrolling: touch; */
+    /*overflow-y: scroll;   */
+    height: 100%;
+}
+
+.layui-nav-tree .layui-nav-child a {
+    padding-left: 45px;
+}
+
+.layui-icon-custom:before {
+    content: '\e607';
+}
+
+/* 系统管理 */
+.layui-icon-custom-1:before {
+    content: '\e716';
+}
+
+/* 会员管理 */
+.layui-icon-custom-2:before {
+    content: '\e66f';
+}
+
+/* 订单管理 */
+.layui-icon-custom-3:before {
+    content: '\e63c';
+}
+
+/* 菜品管理 */
+.layui-icon-custom-4:before {
+    content: '\e653';
+}
+
+/* 仓库管理 */
+.layui-icon-custom-5:before {
+    content: '\e62a';
+}
+
+/* 运营统计 */
+.layui-icon-custom-7:before {
+    content: '\e62c';
+}
+
+/* 桌台管理 */
+.layui-icon-custom-91:before {
+    content: '\e638';
+}
+
+/* 微信模块 */
+.layui-icon-custom-24:before {
+    content: '\e677';
+}
+
+/* 订单模块 */
+.layui-icon-custom-25:before {
+    content: '\e63c';
+}
+
+/* 商品模块 */
+.layui-icon-custom-32:before {
+    content: '\e653';
+}
+
+/* 会员模块 */
+.layui-icon-custom-42:before {
+    content: '\e66f';
+}
+
+/* 文章模块 */
+.layui-icon-custom-55:before {
+    content: '\e60a';
+}
+
+/* 分店模块 */
+.layui-icon-custom-56:before {
+    content: '\e630';
+}
+
+/* 外卖管理 */
+.layui-icon-custom-165:before {
+    content: '\e678';
+}
+
+/* 采购模块 */
+.layui-icon-custom-215:before {
+    content: "\e698";
+}
+
+/* 库存模块 */
+.layui-icon-custom-171:before {
+    content: "\e857";
+}
+
+/* 财务模块 */
+.layui-icon-custom-194:before {
+    content: "\e65e";
+}
+
+/* 数据模块 */
+.layui-icon-custom-158:before {
+    content: "\e62c";
+}
+
+.layui-nav-tree .layui-nav-item a cite {
+    margin-left: 6px;
+}
+.layui-layout-admin .layui-body {
+    bottom: 0;
+}

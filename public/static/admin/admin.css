@@ -1,0 +1,100 @@
+body{padding-top:10px;}
+.fl{float:left;}
+.fr{float:right;}
+
+
+.pagination{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0;
+    font-size: 0;
+}
+.pagination li{
+    display: inline-block;
+    vertical-align: middle;
+    
+    height: 28px;
+    line-height: 28px;
+    margin: 0 -1px 5px 0;
+    background-color: #fff;
+    color: #333;
+    font-size: 12px;
+    border: 1px solid #e2e2e2;
+
+}
+.pagination .active{
+    
+}
+.pagination span{
+    padding: 0 15px;
+}
+.pagination .active span{
+    
+    text-align: center;
+    color: white;
+    display: block;
+    height: 100%;
+    background-color: #009688;
+}
+.pagination a{
+    padding: 0 15px;
+
+}
+
+/* 系统菜单管理 */
+.menu-hd{font-size:14px;font-weight:400;border-top:1px dotted #eee;}
+.menu-dl dt,.menu-dl dd{position:relative;border:1px dotted #eee;border-top:none;}
+.menu-dl .hd,
+.menu-dl .hd2,
+.menu-dl .hd3,
+.menu-dl .layui-form-switch,.menu-btns{position:absolute;left:260px;top:4px;}
+.menu-dl .hd,
+.menu-dl .hd2,
+.menu-dl .hd3{top:-26px;}
+.menu-dl .hd{left:280px}
+.menu-dl .hd2{left:520px;}
+.menu-dl .hd3{left:710px;}
+.menu-dl .layui-form-switch{left:490px;top:1px;margin:0;}
+.menu-dl .checkbox-ids{width:;}
+.menu-dl .menu-sort{position:absolute;left:260px;top:3px;height:20px;line-height:20px;width:40px;padding:0;text-align:center;color:#666;border: 1px solid #e6e6e6;background-color: #fff;border-radius: 2px}
+.menu-dl1,.menu-dl2{display:inline-block;float:left;}
+
+.menu-dl2{padding-left:20px;}
+.menu-dl2 dd{padding:5px 20px;}
+.menu-dl1 dt .menu-sort{left:280px}
+.menu-dl2 dt .menu-sort{left:300px;}
+.menu-dl2 dd .menu-sort{left:340px}
+.menu-dl1 .layui-form-switch{left:520px}
+.menu-dl2 .layui-form-switch{left:500px}
+.menu-btns{left:710px;}
+.menu-dl2 .menu-btns{left:688px;}
+
+.layui-nav-child dd:hover{background-color: #009688;color: #fff;}
+
+.menu-dl1 .layui-row{padding-top: 5px;padding-bottom: 5px;}
+
+
+/*存储配置表单css*/
+
+.layui-form-item .zhao-uploads-w400{width:400px;}
+.layui-form-item .zhao-config-w400{width:400px;}
+.layui-form-item .zhao-config-w500{width:400px;}
+.layui-form-item .zhao-config-w300{width:300px;}
+.layui-form-item .zhao-config-w120{width:120px;}
+.layui-form-item .zhao-w85{width:85px;}
+.layui-form-item .zhao-w120{width:120px;}
+.layui-form-item .zhao-w160{width:160px;}
+.layui-form-item .zhao-w250{width:200px;}
+
+/*颜色*/
+
+.zhao-color-blue{color:#01AAED;}
+.zhao-color-blue:hover{color:#039;text-decoration:underline;}
+
+.zhao-sort{padding-left: 0;text-align: center;}
+
+.zhao-iframe{
+    -webkit-overflow-scrolling: touch; 
+    overflow-y: scroll;    
+}
+ 
