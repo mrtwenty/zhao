@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd59a8b04e262e6a8352b99b1e0c5fa5",
+    "content-hash": "19ed4d065649900cd51b87584e3805a1",
     "packages": [
         {
             "name": "topthink/framework",
@@ -136,6 +136,47 @@
                 }
             ],
             "time": "2018-05-11T06:45:42+00:00"
+        },
+        {
+            "name": "zoujingli/ip2region",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zoujingli/ip2region.git",
+                "reference": "054b6580f4e1f441ca700939fbddd6c0b8488f7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github-api-proxy.cnpkg.org/repos/zoujingli/ip2region/zipball/054b6580f4e1f441ca700939fbddd6c0b8488f7a",
+                "reference": "054b6580f4e1f441ca700939fbddd6c0b8488f7a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Ip2Region.php"
+                ]
+            },
+            "notification-url": "https://repo.packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Anyon",
+                    "email": "zoujingli@qq.com",
+                    "homepage": "http://ctolog.com"
+                }
+            ],
+            "description": "Ip2Region for PHP",
+            "homepage": "https://github.com/zoujingli/Ip2Region",
+            "keywords": [
+                "Ip2Region"
+            ],
+            "time": "2019-05-18T06:44:34+00:00"
         }
     ],
     "packages-dev": [],
