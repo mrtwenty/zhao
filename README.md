@@ -51,5 +51,7 @@ APP_TRACE=1
         <td>阿里云短信包</td>
     </tr>
 </table>
-## 后台效果
-![演示图片](https://github.com/mrtwenty/zhao/blob/master/image/1.png)
+
+
+![image](https://github.com/mrtwenty/zhao/blob/master/image/1.png)
+
