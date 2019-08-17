@@ -1,5 +1,5 @@
 # zhao
-基于thinkphp5.1框架和vue做的一个RBAC后台。
+基于thinkphp5.1框架和layui做的一个RBAC后台。
 
 ## 安装步骤
 1. git 拉取项目
