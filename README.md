@@ -17,13 +17,37 @@ APP_TRACE=1
 ```
 
 ## 项目相关的依赖包
-包名 | 介绍
--|-|-
-topthink/framework | thinkphp框架
-topthink/think-captcha | thinkphp框架的验证码
-zoujingli/ip2region | ip地址库
-naixiaoxin/think-wechat | 一个微信扩展包
-aliyuncs/oss-sdk-php | 阿里云oss包
-qiniu/php-sdk     |七牛云包
-mrgoon/aliyun-sms | 阿里云短信包
-
+<table>
+    <tr>
+        <th>包名</th>
+        <th>介绍</th>
+    </tr>
+    <tr>
+        <td>topthink/framework</td>
+        <td>thinkphp框架</td>
+    </tr>
+    <tr>
+        <td>topthink/think-captcha | thinkphp框架的验证码</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>zoujingli/ip2region</td>
+        <td>ip地址库</td>
+    </tr>
+    <tr>
+        <td>naixiaoxin/think-wechat</td>
+        <td>一个微信扩展包</td>
+    </tr>
+    <tr>
+        <td>aliyuncs/oss-sdk-php</td>
+        <td>阿里云oss包</td>
+    </tr>
+    <tr>
+        <td>qiniu/php-sdk</td>
+        <td>七牛云包</td>
+    </tr>
+    <tr>
+        <td>mrgoon/aliyun-sms</td>
+        <td>阿里云短信包</td>
+    </tr>
+</table>
