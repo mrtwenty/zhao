@@ -15,6 +15,37 @@ DATABASE_DB=zhao
 APP_DEBUG=1
 APP_TRACE=1
 ```
+5. 创建虚拟主机，web服务器nginx配置如下
+```
+server {
+    listen       80;
+    server_name  zhao.com;
+    root         "project path/public/";
+    autoindex    on;
+    index        index.php index.html index.htm;
+    
+    location / {
+      if (!-e $request_filename) {
+        rewrite  ^(.*)$  /index.php?s=/$1  last;
+        break;
+       }
+    }
+    
+    location  ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info  ^(.+?\.php)(/.*)$;
+        if (!-f $document_root$fastcgi_script_name) {
+                return 404;
+        }
+        fastcgi_pass   127.0.0.1:9002;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  PATH_INFO        $fastcgi_path_info;
+        fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+        include        fastcgi_params;
+    }
+}
+```
+
 
 ## 项目相关的依赖包
 <table>
