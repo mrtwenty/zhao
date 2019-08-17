@@ -27,8 +27,8 @@ APP_TRACE=1
         <td>thinkphp框架</td>
     </tr>
     <tr>
-        <td>topthink/think-captcha | thinkphp框架的验证码</td>
-        <td></td>
+        <td>topthink/think-captcha</td>
+        <td>thinkphp框架的验证码</td>
     </tr>
     <tr>
         <td>zoujingli/ip2region</td>
