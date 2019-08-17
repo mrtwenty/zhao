@@ -1,0 +1,175 @@
+{extend name="block/layui" /}
+{block name="main"}
+<form class="layui-form" action="">
+<div class="layui-tab">
+  <ul class="layui-tab-title">
+    <li class="layui-this">文件存储</li>
+    <li>七牛云存储</li>
+    <li>阿里云OSS存储</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show"><!-- 文件存储  -->
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">文件上传</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="upload[is_open]" {if $config.upload_is_open==1}checked{/if} value="1" lay-skin="switch" lay-text="开启|关闭">
+            </div>
+            <div class="layui-form-mid layui-word-aux">是否开启文件上传</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">文件大小</label>
+            <div class="layui-input-inline">
+                <input type="text" name="upload[size]" value="{$config.upload_size}" required lay-verify="required" placeholder="请输入文件大小" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">单位: MB</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上传类型</label>
+            <div class="layui-input-inline">
+                <input type="text" name="upload[ext]" value="{$config.upload_ext}" required lay-verify="required" placeholder="按照,分割" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">存储引擎</label>
+            <div class="layui-input-block">
+              <input type="radio" name="upload[type]" value="local" title="本地服务器存储" {if $config.upload_type=="local"}checked{/if}>
+              <input type="radio" name="upload[type]" value="qiniu" title="七牛云存储" {if $config.upload_type=="qiniu"}checked{/if}>
+              <input type="radio" name="upload[type]" value="oss" title="阿里云OSS存储" {if $config.upload_type=="oss"}checked{/if}>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-tab-item"> <!-- 七牛云存储  -->
+        <div class="layui-form-item">
+            <label class="layui-form-label">存储区域</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="radio" name="qiniu[region]" value="华东" title="华东" {if $qiniu.region=="华东"}checked{/if}>
+                <input type="radio" name="qiniu[region]" value="华北" title="华北" {if $qiniu.region=="华北"}checked{/if}>
+                <input type="radio" name="qiniu[region]" value="华南" title="华南" {if $qiniu.region=="华南"}checked{/if}>
+                <input type="radio" name="qiniu[region]" value="北美" title="北美" {if $qiniu.region=="北美"}checked{/if}>
+            </div>
+            <div class="layui-form-mid layui-word-aux">若还没有<a class="zhao-color-blue" target="_blank" href="https://portal.qiniu.com/signup?code=3lhz6nmnwbple">免费申请10G存储</a>，可免费申请10G存储，申请成功后添加公开bucket。</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Protocol</label>
+            <div class="layui-input-block">
+              <input type="radio" name="qiniu[is_https]" value="http" title="http" {if $qiniu.is_https=="http"}checked{/if}>
+              <input type="radio" name="qiniu[is_https]" value="https" title="https" {if $qiniu.is_https=="https"}checked{/if}>
+              <input type="radio" name="qiniu[is_https]" value="auto" title="auto" {if $qiniu.is_https=="auto"}checked{/if}>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Bucket</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="qiniu[bucket]" value="{$qiniu.bucket}" placeholder="请输入七牛云存储 Domain (访问域名)" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">填写七牛云存储空间名称，如：static</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">Domain</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="qiniu[domain]" value="{$qiniu.domain}" title="请输入七牛云存储 Domain (访问域名)" placeholder="上传类型,按照,分割" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">填写七牛云存储访问域名，如：static.ctolog.cc</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">AccessKey</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="qiniu[accesskey]" value="{$qiniu.accesskey}" title="请输入七牛云 AccessKey (访问密钥)" placeholder="请输入七牛云 AccessKey (访问密钥)" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">可以在 [ 七牛云 > 个人中心 ] 设置并获取到访问密钥。</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">SecretKey</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="qiniu[secretkey]" value="{$qiniu.secretkey}" title="请输入七牛云 SecretKey (安全密钥)" placeholder="请输入七牛云 SecretKey (安全密钥)" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">可以在 [ 七牛云 > 个人中心 ] 设置并获取到安全密钥。</div>
+        </div>
+
+    </div>
+    <div class="layui-tab-item"> <!-- 阿里云OSS存储  -->
+        <div class="layui-form-item">
+            <label class="layui-form-label">Protocol</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+              <input type="radio" name="oss[is_https]" value="http" title="http" {if $oss.is_https=="http"}checked{/if}>
+              <input type="radio" name="oss[is_https]" value="https" title="https" {if $oss.is_https=="https"}checked{/if}>
+              <input type="radio" name="oss[is_https]" value="auto" title="auto" {if $oss.is_https=="auto"}checked{/if}>
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                若还没有OSS存储账号, 可创建<a class="zhao-color-blue" target="_blank" href="https://oss.console.aliyun.com">创建阿里云OSS存储</a>，需要配置OSS公开访问及跨域策略。    
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Bucket</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="oss[bucket]" value="{$oss.bucket}" placeholder="请输入OSS Bucket (空间名称)" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">填写OSS存储空间名称，如：think-admin-oss</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">EndPoint</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="oss[endpoint]" value="{$oss.endpoint}" title="填写OSS数据中心访问域名" placeholder="填写OSS数据中心访问域名" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">填写OSS数据中心访问域名，如：oss-cn-shenzhen.aliyuncs.com</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">AccessKey</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="oss[accesskey]" value="{$oss.accesskey}" title="请输入16位OSS AccessKey (访问密钥)" placeholder="请输入16位OSS AccessKey (访问密钥)" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">可以在 [ 阿里云 > 个人中心 ] 设置并获取到访问密钥。</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">SecretKey</label>
+            <div class="layui-input-inline zhao-uploads-w400">
+                <input type="text" name="oss[secretkey]" value="{$oss.secretkey}" title="请输入OSS SecretKey (安全密钥)" placeholder="请输入OSS SecretKey (安全密钥)" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">可以在 [ 阿里云 > 个人中心 ] 设置并获取到安全密钥。</div>
+        </div>
+
+    </div>
+  </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="config">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+</div>
+</form>
+{/block}
+{block name="footer_js"}
+<script>
+//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+layui.use(['form','layer','jquery','element'], function(){
+    var form  = layui.form,
+        $     = layui.jquery,
+        layer = layui.layer;
+        element = layui.element;
+    var url  = location.pathname;
+
+    var flag=false;
+
+    form.on('submit(config)', function(data){
+        if(flag){
+            return false;
+        }
+
+        flag=true;
+
+        $.post(url,data.field,callback,'json');
+        return false;
+    });
+
+    var callback=function(res){
+        flag=false;
+        layer.msg(res.msg);
+    }
+
+});
+</script>
+{/block}

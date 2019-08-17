@@ -1,0 +1,103 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <style>
+        .menu-dl1, .menu-dl2{display: block;float:none;}
+        .menu-dl1 dt:hover{background-color: #f2f2f2;}
+        .menu-son dd:hover{background-color: #f2f2f2;}
+    </style>
+    <div class="layui-form-item">
+        <div class="layui-col-md12">
+            <a href="{:url('add')}" class="layui-btn layui-btn-primary">添加</a>
+            <a data-href="{:url('delete')}" class="layui-btn layui-btn-primary allDel">删除</a>
+        </div>
+    </div>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+        {foreach $tree as $key=>$item}
+        <dl class="menu-dl1">
+            <dt>
+                <div class="layui-row">
+                    <div class="layui-col-md9">
+                      <input type="checkbox" name="ids[]" value="{$item.id}" lay-filter="level-1" class="checkbox-ids" lay-skin="primary" title="{$item.rule_desc}">
+                    </div>
+              </div>
+            </dt>
+            <dd>
+                {notempty name="$item.son"}
+                {foreach $item.son as $key2=>$item2}
+                <dl class="menu-dl1 menu-son">
+                   <dt>
+                        <div class="layui-row">
+                            <div class="layui-col-md9" style="padding-left: 20px;">
+                                <input type="checkbox" name="ids[]" value="{$item2.id}" lay-filter="level-2" class="checkbox-ids" lay-skin="primary" title="{$item2.rule_desc}">        
+                            </div>
+                            <div class="layui-col-md3">
+                                <a href="{:url('edit',['id'=>$item2.id])}" class="layui-btn layui-btn-primary layui-btn-xs"><i class="layui-icon">&#xe642;</i></a>     
+                            </div>
+                        </div>
+                   </dt>
+                    {notempty name="$item2.son"}{foreach $item2.son as $key3=>$item3}
+                    <dd>
+                        <div class="layui-row">
+                            <div class="layui-col-md9"  style="padding-left: 40px;">
+                                <input type="checkbox" name="ids[]" value="{$item3.id}" class="checkbox-ids" lay-skin="primary" title="{$item3.rule_desc}">        
+                            </div>
+                            <div class="layui-col-md3">
+                                <a href="{:url('edit',['id'=>$item3.id])}" class="layui-btn layui-btn-primary layui-btn-xs"><i class="layui-icon">&#xe642;</i></a>
+                            </div>
+                        </div>
+                    </dd>
+                    {/foreach}{/notempty}
+                </dl>
+                {/foreach}
+                {/notempty}
+            </dd>
+        </dl>
+        {/foreach}
+        </div>
+    </form>
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['form','jquery','layer'], function(){
+    var $    = layui.jquery;
+        form = layui.form;
+        layer= layui.layer;
+    //隔行换色
+    $('.layui-form .layui-row:odd').css('background-color','#f2f2f2');
+    
+    form.on('checkbox(level-1)', function(data){
+        $(data.elem).parent().parent().parent().next().find('input').prop('checked',data.elem.checked);
+        form.render('checkbox');
+    });  
+    
+    form.on('checkbox(level-2)', function(data){
+        $(data.elem).parent().parent().parent().siblings().find('input').prop('checked',data.elem.checked);
+        form.render('checkbox');
+    });
+
+
+    $('.allDel').click(function(){
+        var url=$(this).data('href');
+
+        layer.confirm('确认删除吗？', {btn: ['确认','取消']}, function(){
+            
+            var data=$('.checkbox-ids').serialize();
+
+            $.post(url,data,callback,'json');
+        });
+    });
+
+    function callback(res)
+    {
+        layer.msg(res.msg);
+        if(res.code==1){
+            setTimeout(function(){
+                window.location.href=res.url;
+            },1500);        
+        }
+    }
+
+});
+</script>
+{/block}

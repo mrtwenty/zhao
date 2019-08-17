@@ -1,0 +1,101 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <style>
+        .menu-dl1 dd{padding-left: 20px;}
+    </style>
+    <form class="layui-form" action="">
+        {foreach $rule_list as $key=>$item}
+        <div class="layui-form-item">
+        <dl class="menu-dl1">
+            <dt>
+                <input type="checkbox" name="ids[]" value="{$item.id}" lay-filter="level-1" class="checkbox-ids" lay-skin="primary" title="{$item.rule_desc}">
+            </dt>
+            <dd>{notempty name="$item.son"}
+                {foreach $item.son as $key2=>$item2}
+                <dl class="menu-dl1">
+                   <dt>
+                        <input type="checkbox" name="ids[]" value="{$item2.id}" lay-filter="level-2" class="checkbox-ids" lay-skin="primary" title="{$item2.rule_desc}">
+                   </dt>
+                    {notempty name="$item2.son"}{foreach $item2.son as $key3=>$item3}
+                    <dd>
+                        <input type="checkbox" name="ids[]" value="{$item3.id}" class="checkbox-ids" lay-skin="primary" title="{$item3.rule_desc}">
+                    </dd>
+                    {/foreach}{/notempty}
+                </dl>
+                {/foreach}{/notempty}
+            </dd>
+        </dl>
+        </div>
+        {/foreach}
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="roleForm">立即提交</button>
+                <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
+                <a href="{:url2('role/index')}" class="layui-btn layui-btn-primary">返回</a>
+            </div>
+        </div>
+    </form>
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['form','jquery','layer'], function(){
+
+    var $    = layui.jquery,
+        form = layui.form;
+        permission_list={$permission_list},
+        url  = location.pathname,
+        succ = "{:url2('role/index')}";
+
+    form.on('checkbox(level-1)', function(data){
+        $(data.elem).parent().next().find('input').prop('checked',data.elem.checked);
+        form.render('checkbox');
+    });  
+    
+    form.on('checkbox(level-2)', function(data){
+        $(data.elem).parent().siblings().find('input').prop('checked',data.elem.checked);
+        form.render('checkbox');
+    });  
+    
+
+    //重置
+    $('.reset').click(init);
+
+    function init()
+    {
+        $('.menu-dl1 input').each(function(){
+            var val= parseInt(this.value);
+            if($.inArray(val,permission_list)!==-1){
+                this.checked=true;
+            }else{
+                this.checked=false;
+            }
+        }); 
+        form.render('checkbox');           
+    }
+
+    init();
+
+
+    var flag=false;
+    //监听提交
+    form.on('submit(roleForm)', function(data){
+        if(flag){
+            return false;
+        }
+
+        flag=true;
+        $.post(url,data.field,callback,'json');
+        return false;
+    });
+
+    function callback(res){
+        flag=false;
+        layer.msg(res.msg,{time:1500},function(){    
+            //window.location.href=succ;
+            //整个页面刷新
+            //window.top.location.href = window.location.href;
+        });
+    }
+});
+</script>
+{/block}

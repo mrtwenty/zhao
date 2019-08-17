@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="/static/admin/admin.css">
+    {block name="head"}{/block}
+    <title>Admin</title>
+</head>
+<body>
+{block name="main"}主要内容{/block}
+<script src="/static/admin/layui/layui.js"></script>
+<script>
+//config的设置是全局的
+layui.config({
+  base: '/static/admin/layui/zhao/' //假设这是你存放拓展模块的根目录
+});
+
+</script>
+<script src="/static/admin/admin.js"></script>
+{block name="footer_js"}底部{/block}
+</body>
+</html>

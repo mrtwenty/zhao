@@ -1,0 +1,78 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <form action="">
+    <div class="layui-row layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">管理员:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" placeholder="请输入管理员名" value="{$get.username|default=''}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">登录时间:</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="time" value="{$get.time|default=''}" name="time">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">操作IP:</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="ip" value="{$get.ip|default=''}">
+                </div>
+            </div>    
+            <div class="layui-inline">
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">搜索</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="layui-form">
+        <table class="layui-table mt10" lay-even="" lay-skin="row">
+            <colgroup>
+                <col width="150">
+                <col width="100">
+                <col width="200">
+                <col width="300">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>日志ID</th>
+                    <th>管理员ID</th>
+                    <th>管理员</th>
+                    <th>登录IP</th>
+                    <th>登录位置</th>
+                    <th>登录时间</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {volist name="list" id="info"}
+                <tr>
+                    <td>{$info.id}</td>
+                    <td>{$info.admin_id}</td>
+                    <td>{$info.username}</td>
+                    <td>{$info.ip|long2ip}</td>
+                    <td>{$info.ip|long2region}</td>
+                    <td>{$info.created_at|date='Y-m-d H:i'}</td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+    {$page|raw}
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['laydate','form'], function(){
+    var laydate = layui.laydate;
+
+    laydate.render({
+        elem: '#time'
+    });
+
+
+
+});
+</script>
+{/block}

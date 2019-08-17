@@ -1,0 +1,15 @@
+<ul class="layui-nav layui-nav-tree" lay-filter="test">
+{foreach $menu_tree as $key=>$item}
+    <li class="layui-nav-item">
+        <a class="" href="javascript:;">
+        	<i class="layui-icon layui-icon-custom layui-icon-custom-{$item.id}"></i>
+            <cite>{$item.rule_desc}</cite>
+	    </a>
+        <dl class="layui-nav-child">
+        {foreach $item.son as $key2=>$item2}
+        <dd><a data-id="{$item2.id}" href="{:url($item2.rule_url)}">{$item2.rule_desc}</a></dd>
+        {/foreach}    
+        </dl>
+    </li>
+{/foreach}
+</ul>

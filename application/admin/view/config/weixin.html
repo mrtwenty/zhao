@@ -1,0 +1,90 @@
+{extend name="block/layui" /}
+{block name="main"}
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">小程序APPID</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="text" value="{$config.weixin_applet_appid}" name="weixin_applet_appid" required lay-verify="required" placeholder="请输入微信APPID" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">小程序APPSECRET</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="password" value="{$config.weixin_applet_appsecret}" name="weixin_applet_appsecret" required lay-verify="required" placeholder="请输入微信APPID" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">微信APPID</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="text" value="{$config.weixin_appid}" name="weixin_appid" required lay-verify="required" placeholder="请输入微信APPID" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">微信APPSECRET</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="password" value="{$config.weixin_appsecret}" name="weixin_appsecret" required lay-verify="required" placeholder="请输入微信APPSECRET" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">微信TOKEN</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="password" value="{$config.weixin_token}" name="weixin_token" required lay-verify="required" placeholder="请输入微信TOKEN" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">微信商户ID</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="text" value="{$config.weixin_mchid}" name="weixin_mchid" required lay-verify="required" placeholder="请输入微信商户ID" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label zhao-w160">微信商户KEY</label>
+        <div class="layui-input-inline zhao-config-w400">
+            <input type="password" value="{$config.weixin_key}" name="weixin_key" required lay-verify="required" placeholder="请输入微信商户KEY" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="config">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['form','jquery','layer'], function(){
+    var form  = layui.form,
+        $     = layui.jquery,
+        layer = layui.layer;
+    
+    var url  = location.pathname;
+
+    var flag=false;
+    form.on('submit(config)', function(data){
+        if(flag){
+            return false;
+        }    
+        flag=true;
+        $.post(url,data.field,callback,'json');
+        return false;
+    });
+
+    function callback(res){
+        layer.msg(res.msg,{time:1500},function(){
+            flag=false;
+            window.location.reload();
+        });
+    }
+
+});
+</script>
+{/block}

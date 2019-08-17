@@ -1,0 +1,101 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <a href="{:url('add')}" class="layui-btn layui-btn-primary">添加</a>
+            <a data-href="{:url('delete')}" class="layui-btn layui-btn-primary allDel">删除</a>
+        </div>
+    </div>
+    <form class="page-list-form">
+    <div class="layui-form">
+        <table class="layui-table mt10" lay-even="" lay-skin="row">
+            <colgroup>
+                <col width="50">
+                <col width="75">
+                <col width="120">
+                <col>
+                <col width="150">
+                <col width="200">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
+                    </th>
+                    <th>角色ID</th>
+                    <th>角色名</th>
+                    <th>角色描述</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {volist name="list" id="vo"}
+                <tr>
+                    <td><input type="checkbox" class="layui-checkbox checkbox-ids" name="ids[]" value="{$vo.id}" lay-skin="primary"></td>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.role_name}</td>
+                    <td>{$vo.role_desc}</td>
+                    <td>{$vo.created_at|date="Y-m-d H:i"}</td>
+                    <td>
+                        <div class="layui-btn-group">
+                            <a href="{:url('permissionConfig',['id'=>$vo.id])}" class="layui-btn layui-btn-primary layui-btn-sm">配置权限</a>
+                            <a href="{:url('edit',['id'=>$vo.id])}" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe642;</i></a>
+                            <a data-href="{:url('/admin/role/delete',['id'=>$vo.id])}" class="layui-btn layui-btn-primary layui-btn-sm del"><i class="layui-icon">&#xe640;</i></a>
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+    </form>
+{$page|raw}    
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['form','jquery','layer'], function(){
+    var form = layui.form,
+        $    = layui.jquery,
+        layer= layui.layer;
+
+    var flag=false;    
+    $('.allDel').click(function(){
+        var url=$(this).data('href');
+
+        layer.confirm('确认删除吗？', {btn: ['确认','取消']}, function(){
+            if(flag){
+                return false;
+            }
+            flag=true;
+            var data=$('.checkbox-ids').serialize();
+            $.post(url,data,callback,'json');
+        });
+    });
+
+    $('.del').click(function(){
+        var url=$(this).data('href');
+
+        layer.confirm('确认删除吗？', {btn: ['确认','取消']}, function(){
+            if(flag){
+                return false;
+            }
+            flag=true;
+            $.post(url,callback,'json');    
+        });
+    });
+
+    function callback(res)
+    {
+        flag=false;
+        layer.msg(res.msg);
+        if(res.code==1){
+            setTimeout(function(){
+                window.location.href=res.url;
+            },1500);        
+        }
+    }
+
+});
+</script>
+{/block}

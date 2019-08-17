@@ -1,0 +1,110 @@
+{extend name="block/layui" /}
+{block name="main"}
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+      <div class="layui-card">
+        <div class="layui-card-header">系统信息</div>
+        <div class="layui-card-body">
+        	<table>
+        		<colgroup>
+		            <col width="160">
+		            <col>
+		        </colgroup>
+        		<tbody>
+        		<tr>
+        			<td>PHP版本</td>
+        			<td>{$Think.PHP_VERSION}</td>
+        		</tr>	
+				    <tr>
+					   <td>MySQL版本</td>
+					   <td>{$mysql_version}</td>
+				    </tr>
+				    <tr>
+					   <td>ThinkPHP版本:</td>
+					   <td>{$think_version}</td>
+			      </tr>
+            <tr>
+              <td>允许POST数据大小:</td>
+              <td>{:ini_get('post_max_size')}</td>
+            </tr>
+				</tbody>
+        	</table>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-col-md6">
+      <div class="layui-card">
+        <div class="layui-card-header">产品信息</div>
+        <div class="layui-card-body">
+          <table>
+                <colgroup>
+                    <col width="160">
+                    <col>
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td colspan="2">zhao总后台</td>
+                </tr>   
+                <tr>
+                    <td>版本号:</td>
+                    <td>1.0.0 </td>
+                </tr>
+                <tr>
+                    <td>联系方式:</td>
+                    <td>mrtwenty@foxmail.com</td>
+                </tr>
+                <tr>
+                    <td>版权所有:</td>
+                    <td>xxx公司</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+      <div class="layui-card">
+        <div class="layui-card-header">汇总信息</div>
+        <div class="layui-card-body">
+          <table width="100%">
+                <colgroup>
+                    
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td>会员数:</td>
+                    <td></td>
+                    <td>商品数:</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>   
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+{/block}
+{block name="footer_js"}{/block}

@@ -1,0 +1,133 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <form action="">
+    <div class="layui-row layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">管理员:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" placeholder="请输入管理员名" value="{$get.username|default=''}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">搜索时间:</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="time" value="{$get.time|default=''}" name="time">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">请求方式:</label>
+                <div class="layui-input-inline">
+                    <select name="method">
+                        <option value=""></option>
+                        <option {eq name="$get.method|default=''" value="POST"}selected{/eq} value="POST">POST</option>
+                        <option {eq name="$get.method|default=''" value="GET"}selected{/eq} value="GET">GET</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">操作IP:</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="ip" value="{$get.ip|default=''}">
+                </div>
+            </div>    
+            <div class="layui-inline">
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">搜索</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div>
+        <table class="layui-table mt10" lay-even="" lay-skin="row">
+            <colgroup>
+                <col width="100">
+                <col width="100">
+                <col width="100">
+                <col>
+                <col width="120">
+                <col width="200">
+                <col width="150">
+                <col width="100">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>日志ID</th>
+                    <th>管理员</th>
+                    <th>请求方式</th>
+                    <th>请求地址</th>
+                    <th>操作IP</th>
+                    <th>操作位置</th>
+                    <th>操作时间</th>
+                    <th>操作</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {volist name="list" id="info"}
+                <tr>
+                    <td>{$info.id}</td>
+                    <td>{$info.username}</td>
+                    <td>{$info.method}</td>
+                    <td>{$info.url}</td>
+                    <td>{$info.ip|long2ip}</td>
+                    <td>{$info.ip|long2region}</td>
+                    <td>{$info.created_at|date='Y-m-d H:i'}</td>
+                    <td>
+                        <button data-href="{:url('look',['id'=>$info.id])}" class="look layui-btn layui-btn-sm">查看数据</button>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+    {$page|raw}
+    
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['laydate','form','layer','jquery'], function(){
+    var laydate = layui.laydate,
+        layer   = layui.layer;
+        $       = layui.jquery;
+    
+    laydate.render({
+        elem: '#time'
+    });
+
+    $('.look').click(function(){
+        var url=$(this).data('href');
+        $.getJSON(url,callback);
+    });
+
+     var callback =function(res){
+
+        if (res.code==0) {
+            layer.msg(res.msg);
+            return false;
+        }
+
+        var get=' ',
+            post=' ';
+        $.each(res.data.get,function(k,v){
+            get+=k+'='+htmlDecode(v)+'<hr/>';
+        });
+
+        $.each(res.data.post,function(k,v){
+            post+=k+'='+htmlDecode(v)+'<hr/>';
+        });
+        
+        layer.tab({
+          area: ['800px', '400px'],
+          tab: [{title: 'GET', content: get},
+                {title: 'POST', content: post}]
+        });
+
+    };
+
+    //Html解码获取Html实体 
+    function htmlDecode(value){ 
+        return $('<div>').html(value).text(); 
+    } 
+
+});
+</script>
+{/block}

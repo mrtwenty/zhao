@@ -1,0 +1,132 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <a href="{:url('add')}" class="layui-btn layui-btn-primary">添加</a>
+            <a data-href="{:url('delete')}" class="layui-btn layui-btn-primary allDel">删除</a>
+        </div>
+    </div>
+    <form class="page-list-form">
+    <div class="layui-form">
+        <table class="layui-table mt10" lay-even="" lay-skin="row">
+            <colgroup>
+                <col width="50">
+                <col width="100">
+                <col width="100">
+                <col>
+                <col width="90">
+                <col width="150">
+                <col width="120">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
+                    </th>
+                    <th>管理员ID</th>
+                    <th>管理员</th>
+                    <th>所属角色</th>
+                    <th>是否启用</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {volist name="list" id="user"}
+                <tr>
+                    <td><input type="checkbox" class="layui-checkbox checkbox-ids" name="ids[]" value="{$user.id}" lay-skin="primary"></td>
+                    <td>{$user.id}</td>
+                    <td>{$user.username}</td>
+                    <td>
+                        {foreach $user.role_name as $k=>$v}    
+                            <button type="button" class="layui-btn layui-btn-sm">{$v}</button>
+                        {/foreach}
+                    </td>
+                    <td>
+                        <input type="checkbox" value="{:url('usedStatus',['id'=>$user.id])}" lay-filter="is_used" lay-skin="switch" name="is_used" {if $user.is_used == 0} checked {/if}>
+                    </td>
+                    <td>{$user.created_at|date="Y-m-d H:i"}</td>
+                    <td>
+                        <div class="layui-btn-group">
+                            <a href="{:url('edit',['id'=>$user.id])}" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe642;</i></a>
+                            <a data-href="{:url('delete',['id'=>$user.id])}" class="layui-btn layui-btn-primary layui-btn-sm del"><i class="layui-icon">&#xe640;</i></a>
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+    </form>
+{$page|raw}
+{/block}
+{block name="footer_js"}
+<script>
+
+layui.use(['form','layer','jquery'], function(){
+    var form  = layui.form,
+        layer = layui.layer;
+        $     = layui.jquery;
+
+    //状态调整
+    form.on("switch(is_used)",function(data){
+        callback(data);
+    });
+    var callback=function(data){
+        
+        var stat = data.elem.checked ? 0: 1;
+        var url  = data.value;
+        
+        $.post(url,{stat:stat},function(res){
+
+            layer.msg(res.msg);
+
+        },'json');
+    }
+
+    var flag=false;
+    //删除
+    $('.allDel').click(function(){
+        var url=$(this).data('href');
+
+        layer.confirm('确认删除吗？', {btn: ['确认','取消']}, function(){
+            if(flag){
+                return false;
+            }
+
+            flag=true;
+            var data=$('.checkbox-ids').serialize();
+
+            $.post(url,data,callback_del,'json');
+        });
+    });
+
+    $('.del').click(function(){
+        var url=$(this).data('href');
+
+        layer.confirm('确认删除吗？', {btn: ['确认','取消']}, function(){
+            if(flag){
+                return false;
+            }
+
+            flag=true;
+            $.post(url,callback_del,'json');    
+        });
+    });
+
+    function callback_del(res)
+    {
+        flag=false;
+        layer.msg(res.msg);
+        if(res.code==1){
+            setTimeout(function(){
+                window.location.href=res.url;
+            },1500);        
+        }
+    }
+    
+
+
+}); 
+</script>
+{/block}

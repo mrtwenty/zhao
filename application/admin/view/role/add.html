@@ -1,0 +1,59 @@
+{extend name="block/layui" /}
+{block name="main"}
+<form class="layui-form" action="">
+  <div style="padding-right: 20px;">
+  <div class="layui-form-item">
+    <label class="layui-form-label">角色名</label>
+    <div class="layui-input-block">
+        <input type="text" name="role_name" required  lay-verify="required" placeholder="请输入角色名" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">角色描述</label>
+    <div class="layui-input-block">
+      <textarea name="role_desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="roleForm">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <a href="{:url2('role/index')}" class="layui-btn layui-btn-primary">返回</a>
+    </div>
+  </div>
+</form>
+</div>
+{/block}
+{block name="footer_js"}
+    <script>
+    layui.use(['form','jquery','layer'], function(){
+
+        var form  = layui.form,
+            $     = layui.jquery,
+            layer = layui.layer;
+
+        var url  = location.pathname;
+        var succ = "{:url2('role/index')}";
+        var flag=false;
+
+        //监听提交
+        form.on('submit(roleForm)', function(data){
+            if(flag){
+                return false;
+            }
+            flag=true;
+            $.post(url,data.field,callback,'json');
+            return false;
+        });
+
+        function callback(res){
+            flag=false;
+            layer.msg(res.msg,{time:1500},function(){
+                if(res.code==1){
+                    window.location.href=succ;
+                }       
+            });
+        }
+    });
+    </script>
+{/block}

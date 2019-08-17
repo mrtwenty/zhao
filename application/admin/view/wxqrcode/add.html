@@ -1,0 +1,71 @@
+{extend name="block/layui" /}
+{block name="main"}
+<div style="padding-right: 20px;">
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">场景名:</label>
+        <div class="layui-input-inline zhao-config-w300">
+            <input type="text" name="scene_name" required  lay-verify="required" placeholder="请输入管理员名" autocomplete="off" class="layui-input">
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">场景类型</label>
+        <div class="layui-input-inline zhao-config-w300">
+            <input type="radio" name="scene_type" value="0" title="永久二维码" checked>
+            <input type="radio" name="scene_type" value="1" title="临时二维码" >
+        </div>
+        <!-- 二维码类型 0永久二维码 1临时二维码 -->
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">过期时间:</label>
+        <div class="layui-input-inline zhao-config-w300">
+            <input type="text" name="expire_seconds" required value="86400" lay-verify="required" placeholder="请输入有效时间" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">临时二维码有效时间，以秒为单位。 最大不超过2592000（即30天），此字段如果不填，则默认有效期为86400秒</div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="from">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a href="{:url('wxqrcode/index')}" class="layui-btn layui-btn-primary">返回</a>
+        </div>
+    </div>
+</form>
+</div>
+{/block}
+{block name="footer_js"}
+    <script>
+    layui.use(['form','jquery','layer'], function(){
+
+        var form  = layui.form,
+            $     = layui.jquery,
+            layer = layui.layer;
+
+        var url  = location.pathname;
+        var succ = "{:url('wxqrcode/index')}";
+        var flag=false;
+
+        //监听提交
+        form.on('submit(from)', function(data){
+            if(flag){
+                return false;
+            }
+            flag=true;
+            $.post(url,data.field,callback,'json');
+            return false;
+        });
+
+        function callback(res){
+            flag=false;
+            layer.msg(res.msg);
+            if(res.code==1){
+                setTimeout(function(){
+                    window.location.href=succ;
+                },1500);        
+            }
+        }
+
+    });
+    </script>
+{/block}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>zhao系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/admin/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" type="text/css" href="/static/admin/custom.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+    <div class="layui-logo">zhao系统</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item" lay-unselect="">
+            <a href="javascript:;" id="flexible" title="侧边伸缩">
+              <i class="layui-icon layui-icon-shrink-right"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item layui-hide-xs" lay-unselect="">
+            <a href="/" target="_blank" title="前台">
+              <i class="layui-icon layui-icon-website"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item" lay-unselect="">
+            <a id="refresh" href="javascript:;" title="刷新">
+              <i class="layui-icon layui-icon-refresh-3"></i>
+            </a>
+        </li>
+        <span class="layui-nav-bar" style="left: 30px; top: 48px; width: 0px; opacity: 0;"></span>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+            {$Think.session.admin_username}
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a id="index_config" data-id="100000" href="{:url('index/config')}">安全设置</a></dd>
+          <dd><a id="refresh_auth" href="{:url('index/refresh')}">刷新权限</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="{:url('auth/logout')}">退出</a></li>
+    </ul>
+    </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll" id="view">
+        {include file="index/menu" menu_tree=$menu_tree /}
+    </div>
+  </div>
+  <div class="layui-body" id="switchBody">
+        <div class="layui-tab layui-tab-card" lay-filter="zhaoTab" lay-allowClose="true">
+            <ul class="layui-tab-title">
+                <li lay-id="0" class="layui-this">后台首页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show zhao-iframe">
+                    <iframe lay-id="0" src="{:url('index/welcome')}" width="100%" height="100%" frameborder="0" scrolling="yes" class="zhao-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin/layui/layui.js" charset="utf-8"></script>
+<script>
+layui.use(['jquery','element','layer'], function(){
+    
+  var $     = layui.jquery, 
+    element = layui.element, 
+    layer   = layui.layer;
+
+    $('.layui-tab-content').height($(window).height() - 100);
+
+    var tab = {
+            add: function(title, url, id) {
+                element.tabAdd('zhaoTab', {
+                    title: '<i class="layui-icon j-ajax" data-href="/admin.php/admin/menu/quick.html?id='+id+'">&#xe600;&nbsp;</i>'+title,
+                    content: '<div class="zhao-iframe"><iframe width="100%" height="100%" lay-id="'+id+'" frameborder="0" src="'+url+'" scrolling="yes" class="x-iframe"></iframe></div>',
+                    id: id
+                });
+            }, 
+            change: function(id) {
+                element.tabChange('zhaoTab', id);
+            }
+        };
+
+
+    $('#view').on('click','dd a',callback);
+    
+    $('#index_config').click(callback);
+
+
+    function callback(event) {
+        
+        var that = $(this);
+        if ($('iframe[src="'+that.attr('href')+'"]')[0]) {
+            tab.change(that.attr('data-id'));
+            event.stopPropagation();
+            return false;
+        }
+        if ($('iframe').length == 30) {
+            layer.msg('最多可打开10个标签页');
+            return false;
+        }
+        that.css({color:'#fff'});
+        tab.add(that.text(), that.attr('href'), that.attr('data-id'));
+        tab.change(that.attr('data-id'));
+        event.stopPropagation();
+        return false;
+    }
+
+    //刷新
+    $('#refresh').click(function(){
+        var id=$('#switchBody .layui-show iframe');
+        id[0].contentWindow.location.reload(!0);
+    });
+
+
+    //refresh_auth 
+    $('#refresh_auth ').click(function(){
+        var url=this.href;
+    
+        $.getJSON(url,function(res){
+            layer.msg('成功!');
+            $('#view').html(res.data);
+            element.render('nav');
+        });
+
+        return false;
+    });
+
+    // 菜单收缩展开
+    $("#flexible").click(function(){
+        if ($(".layui-layout-admin").hasClass("layui-layout-min")) {
+            // 展开
+            $(".layui-layout-admin").removeClass("layui-layout-min");
+        } else {
+            // 收缩
+            $(".layui-layout-admin").addClass("layui-layout-min");
+            $(".layui-nav-item").removeClass("layui-nav-itemed");
+        }
+        element.render('nav');
+    })
+    element.on('nav(test)', function(elem){
+        layer.close(layer.index);
+        $(".layui-layout-admin").removeClass("layui-layout-min");
+    });
+    $(".layui-layout-admin .layui-nav-tree .layui-nav-item a").hover(function(){
+        if (!$(".layui-layout-admin").hasClass("layui-layout-min")) return false;
+        var that = this;
+        layer.tips($(this).find('cite').text(), that);
+    }, function(){})
+
+    
+});
+
+//F5键刷新iframe
+document.onkeydown = function(e){
+    e = window.event || e;
+    var keycode = e.keyCode || e.which;
+    
+    if(keycode == 116){
+
+        if(window.event){
+            
+            try{
+                e.keyCode = 0;
+            }catch(e){
+
+            }
+
+            e.returnValue = false;
+
+        }else{
+            e.preventDefault();
+        }
+        document.getElementById('refresh').click();
+    }
+}
+</script>
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+{extend name="block/layui" /}
+{block name="main"}
+<div style="padding-right: 20px;">
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">所属角色:</label>
+        <div class="layui-input-block">
+            {foreach $role_list as $item}    
+            <input type="checkbox" name="role_id[]" {in name="$item.id" value="$admin_role"}checked{/in} title="{$item.role_name}" value="{$item.id}">
+            {/foreach}    
+        </div>
+    </div> 
+    <div class="layui-form-item">
+        <label class="layui-form-label">管理员名:</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" required value="{$info.username}" lay-verify="required" placeholder="请输入管理员名" readonly autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">登录密码:</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" placeholder="请输入登录密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否启用</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="is_used" checked value="0" lay-skin="switch">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+        {:token()}
+        <button class="layui-btn" lay-submit lay-filter="from">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <a href="{:url('admin/index')}" class="layui-btn layui-btn-primary">返回</a>
+        </div>
+    </div>
+</form>
+</div>
+{/block}
+{block name="footer_js"}
+    <script>
+    layui.use(['form','jquery','layer'], function(){
+
+        var form  = layui.form,
+            $     = layui.jquery,
+            layer = layui.layer;
+
+        var url  = location.pathname;
+        var succ = "{:url('admin/index')}";
+
+
+        var flag=false;
+
+        //监听提交
+        form.on('submit(from)', function(data){
+            if(flag){
+                return false;
+            }
+
+            flag=true;
+            $.post(url,data.field,callback,'json');
+
+            return false;
+        });
+
+        function callback(res){
+            flag=false;
+            layer.msg(res.msg);
+            if(res.code==1){
+                setTimeout(function(){
+                    window.location.href=succ;
+                },1500);        
+            }
+        }
+
+    });
+    </script>
+{/block}

@@ -1,0 +1,203 @@
+{extend name="block/layui" /}
+{block name="main"}
+<form class="layui-form" action="">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">网站设置</li>
+        <li>网站开关</li>
+        <li>短信配置</li>
+      </ul>
+      <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-form-item">
+                <label class="layui-form-label">默认头像</label>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" id="upload_member_photo">
+                      <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
+                    <input type="hidden" name="default_member_photo" id="default_member_photo" value="{$config.default_member_photo}">
+                </div>
+                <div class="layui-form-mid layui-word-aux">会员默认头像</div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">网站标题</label>
+              <div class="layui-input-inline">
+                  <input type="text" value="{$config.web_title}" name="web_title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">辅助文字</div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">网站关键字</label>
+              <div class="layui-input-inline">
+                  <input type="text" name="web_keywords" value="{$config.web_keywords}" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">辅助文字</div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">网站描述</label>
+                <div class="layui-input-block">
+                    <textarea name="web_description" placeholder="请输入内容" class="layui-textarea">{$config.web_description}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">站点统计</label>
+                <div class="layui-input-block">
+                    <textarea name="web_count" placeholder="请输入百度站长统计代码" class="layui-textarea">{$config.web_count}</textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-form-item">
+                <label class="layui-form-label">网站开关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="web_is_open" {if $config.web_is_open==1}checked{/if} value="1" lay-skin="switch" lay-text="开启|关闭">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">关站说明</label>
+                <div class="layui-input-block">
+                    <textarea name="web_close_msg" placeholder="请输入关站说明" class="layui-textarea">{$config.web_close_msg}</textarea>
+                </div>
+            </div>
+    
+        </div>
+        <div class="layui-tab-item">
+            <div class="layui-form-item">
+                <label class="layui-form-label">access_key</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="ali_sms_access_key" value="{$config.ali_sms_access_key}" required lay-verify="required" placeholder="请输入备案号" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">阿里云SMS短信 access_key</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">access_secret</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="ali_sms_access_secret" value="{$config.ali_sms_access_secret}" required lay-verify="required" placeholder="请输入备案号" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">阿里云SMS短信 access_secret</div>
+            </div>
+            <div class="layui-form-item">
+            <label class="layui-form-label">签名</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="ali_sms_sign_name" value="{$config.ali_sms_sign_name}" required lay-verify="required" placeholder="请输入备案号" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">阿里云SMS短信 签名</div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码ID</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="ali_sms_verification_code" value="{$config.ali_sms_verification_code}" required lay-verify="required" placeholder="请输入备案号" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">阿里云SMS短信 验证码模板ID</div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">消费短信ID</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="ali_sms_shopping_notify" value="{$config.ali_sms_shopping_notify}" required lay-verify="required" placeholder="线下消费短信通知" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">阿里云SMS短信 消费模板ID</div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">浏览器端AK</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="baidu_lbs_browser_ak" value="{$config.baidu_lbs_browser_ak}" required lay-verify="required" placeholder="请输入AK" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">百度LBS应用 AK</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">服务器端AK</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" name="baidu_lbs_server_ak" value="{$config.baidu_lbs_server_ak}" required lay-verify="required" placeholder="请输入AK" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">百度LBS应用 AK</div>
+            </div>  
+             <div class="layui-form-item">
+                <label class="layui-form-label">腾讯地图:</label>
+                <div class="layui-input-inline zhao-config-w400">
+                    <input type="text" value="{$config.lbs_key}" name="lbs_key" required lay-verify="required" placeholder="腾讯地图lbs_key" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">腾讯地图lbs_key</div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="config">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+{/block}
+{block name="footer_js"}
+<script>
+layui.use(['element','form','jquery','layer','upload'], function(){
+    var form  = layui.form,
+        $     = layui.jquery,
+        layer = layui.layer,
+        upload= layui.upload;
+    
+    var url  = location.pathname;
+
+    var flag=false;
+    form.on('submit(config)', function(data){
+        if(flag){
+            return false;
+        }
+        flag=true;
+        $.post(url,data.field,callback,'json');
+
+        return false;
+    });
+
+    function callback(res){
+        flag=false;
+        layer.msg(res.msg);
+        if(res.code==1 && res.data.status==1){
+            layer.msg('由于更新了入口，页面要重新刷新。')
+            
+            setTimeout(function(){
+                window.top.location.href=res.data.url;    
+            },3000);
+            
+        }
+    }
+
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#test1' ,
+        url:  "{:url('index/uploads')}?path=logo",
+        done: function(res){
+
+            layer.msg(res.msg);
+
+            if (res.code==1) {
+                web_logo.value=res.data;
+            }
+        }
+    });
+
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#upload_member_photo' ,
+        url:  "{:url('index/uploads')}?path=avatar",
+        done: function(res){
+
+            layer.msg(res.msg);
+
+            if (res.code==1) {
+                default_member_photo.value=res.data;
+            }
+        }
+    });
+
+    
+
+});
+</script>
+{/block}

@@ -1,0 +1,95 @@
+{extend name="block/layui" /}
+{block name="main"}
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <a href="{:url('add')}" class="layui-btn layui-btn-primary">添加</a>
+        </div>
+    </div>
+    <form class="page-list-form">
+    <div class="layui-form">
+        <table class="layui-table mt10" lay-even="" lay-skin="row">
+            <colgroup>
+                <col width="200">
+                <col width="120">
+                <col width="360">
+                <col width="180">
+                <col width="180">
+                <col width="100">
+                <col width="100">
+                <col width="150">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>场景名</th>
+                    <th>场景类型</th>
+                    <th>场景地址</th>
+                    <th>过期时间</th>
+                    <th>创建时间</th>
+                    <td>扫描关注</td>
+                    <td>关注后扫描</td>
+                    <th>操作</th>
+                </tr> 
+            </thead>
+            <tbody>
+                {volist name="list" id="info"}
+                <tr>
+                    <td>{$info.scene_name}</td>
+                    <td>{$info.scene_type}</td>
+                    <td>{$info.url}</td>
+                    <td>{$info.expire_seconds}</td>
+                    <td>{$info.created_at|date="Y-m-d H:i:s"}</td>
+                    <td>{$info.subscribe}</td>
+                    <td>{$info.scan}</td>
+                    <td>
+                        <div class="layui-btn-group">
+                            {if $info.is_expire}
+                            <a target="_blank" href="{$info.img}" class="layui-btn layui-btn-primary layui-btn-sm">
+                                <i class="layui-icon">&#xe64a;</i>
+                            </a>
+                            {/if}
+                            {if $info.scene_type eq "临时"}
+                            <a data-href="{:url('delete',['id'=>$info.id])}" class="layui-btn layui-btn-primary layui-btn-sm del"><i class="layui-icon">&#xe640;</i></a>
+                            {/if}
+                        </div>
+                    </td>
+                </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+    </form>
+{$page|raw}
+{/block}
+{block name="footer_js"}
+<script>
+
+layui.use(['form','layer','jquery'], function(){
+    var form  = layui.form,
+        layer = layui.layer;
+        $     = layui.jquery;
+
+    var flag=false;    
+    $('.del').click(function(){
+        var url=$(this).data('href');
+        layer.confirm('确认删除吗？', {btn: ['确认','取消']}, function(){
+            if(flag){
+                return false;
+            }
+            flag=true;
+            $.post(url,callback_del,'json');    
+        });
+    });
+
+    function callback_del(res)
+    {
+        flag=false;
+        layer.msg(res.msg,{time:2000},function(){
+            if(res.code==1){
+                window.location.href=res.url;
+            }    
+        });
+    }
+
+}); 
+</script>
+{/block}
