@@ -78,7 +78,8 @@ class Index extends Base
 
         $this->assign('menu_tree', $menu_tree);
 
-        $str = $this->fetch('menu');
+        // $str = $this->fetch('menu');
+        $str = $this->fetch('menu')->getContent();
 
         $this->success('成功!', null, $str);
     }
