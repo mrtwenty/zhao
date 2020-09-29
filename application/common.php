@@ -50,11 +50,7 @@ function lay_switch_list($name, $val, $id)
     $module   = $request->module();
     $temp_str = under_line2upper($name);
 
-    if ($module == 'admin') {
-        $url = url2($temp_str, ['id' => $id]);
-    } else {
-        $url = url($temp_str, ['id' => $id]);
-    }
+    $url = url($temp_str, ['id' => $id]);
 
     $checked = '';
     if ($val == 0) {

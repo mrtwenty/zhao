@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 50716
-Source Host           : localhost:3306
-Source Database       : test
+Source Server         : 本地
+Source Server Version : 50723
+Source Host           : 127.0.0.1:3306
+Source Database       : hehe
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-08-17 11:28:19
+Date: 2020-09-29 09:56:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,8 +48,34 @@ CREATE TABLE `z_admin_action_log` (
   `created_at` int(11) unsigned NOT NULL COMMENT '录入时间',
   `ip` int(11) unsigned NOT NULL COMMENT '请求IP',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11234 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='管理员操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=11257 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='管理员操作日志表';
 
+-- ----------------------------
+-- Records of z_admin_action_log
+-- ----------------------------
+INSERT INTO `z_admin_action_log` VALUES ('11234', '1', 'GET', 'admin/index/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343858', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11235', '1', 'GET', 'admin/index/welcome.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343859', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11236', '1', 'GET', 'admin/config/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343862', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11237', '1', 'GET', 'admin/sms_log/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343863', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11238', '1', 'GET', 'admin/role/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343864', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11239', '1', 'GET', 'admin/admin/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343864', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11240', '1', 'GET', 'admin/role/permissionconfig/id/1.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343868', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11241', '1', 'GET', 'admin/role/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343870', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11242', '1', 'GET', 'admin/role/add.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343872', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11243', '1', 'GET', 'admin/role/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343873', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11244', '1', 'GET', 'admin/role/add.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343880', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11245', '1', 'GET', 'admin/role/add.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343945', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11246', '1', 'GET', 'admin/role/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343947', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11247', '1', 'GET', 'admin/admin/add.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343949', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11248', '1', 'GET', 'admin/admin/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343950', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11249', '1', 'GET', 'admin/admin_login_log/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343961', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11250', '1', 'GET', 'admin/admin_login_log/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601343962', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11251', '1', 'GET', 'admin/config/uploads.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601344141', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11252', '1', 'GET', 'admin/config/uploads.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601344384', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11253', '1', 'GET', 'admin/config/uploads.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601344452', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11254', '1', 'GET', 'admin/config/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601344498', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11255', '1', 'GET', 'admin/sms_log/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601344499', '2130706433');
+INSERT INTO `z_admin_action_log` VALUES ('11256', '1', 'GET', 'admin/role/index.html', 'a:2:{s:3:\"get\";a:0:{}s:4:\"post\";a:0:{}}', '1601344499', '2130706433');
 
 -- ----------------------------
 -- Table structure for z_admin_login_log
@@ -61,11 +87,12 @@ CREATE TABLE `z_admin_login_log` (
   `ip` int(11) unsigned NOT NULL COMMENT '登录IP',
   `created_at` int(11) unsigned NOT NULL COMMENT '登录时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='管理员日志表';
 
 -- ----------------------------
 -- Records of z_admin_login_log
 -- ----------------------------
+INSERT INTO `z_admin_login_log` VALUES ('103', '1', '2130706433', '1601343857');
 
 -- ----------------------------
 -- Table structure for z_admin_role
@@ -119,7 +146,7 @@ INSERT INTO `z_config` VALUES ('9', 'web_title', '网站标题', '网站标题',
 INSERT INTO `z_config` VALUES ('13', 'upload_is_open', '1', '是否开启文件上传 0关闭、1开启', 'upload');
 INSERT INTO `z_config` VALUES ('14', 'upload_ext', 'png,jpg,gif', '文件上传类型', 'upload');
 INSERT INTO `z_config` VALUES ('15', 'upload_type', 'local', '文件上传方式  local、oss、qiniu', 'upload');
-INSERT INTO `z_config` VALUES ('16', 'upload_params', 'a:2:{s:3:\"oss\";a:5:{s:8:\"is_https\";s:5:\"https\";s:6:\"bucket\";s:5:\"mrtw2\";s:8:\"endpoint\";s:9:\"oss-cn-2m\";s:9:\"accesskey\";s:8:\"LTAIm1f2\";s:9:\"secretkey\";s:12:\"pQGgd2SbounY\";}s:5:\"qiniu\";a:6:{s:6:\"region\";s:6:\"北美\";s:8:\"is_https\";s:4:\"auto\";s:6:\"bucket\";s:3:\"Bu2\";s:6:\"domain\";s:4:\"Dom2\";s:9:\"accesskey\";s:32:\"ziC0c2UdFWLc8BDw75ssFuMQG6A6Byin\";s:9:\"secretkey\";s:22:\"G7dL16z1ySoOcHCy6Z\";}}', '文件上传相关参数', 'upload');
+INSERT INTO `z_config` VALUES ('16', 'upload_params', '{\"oss\":{\"is_https\":\"http\",\"bucket\":\"\",\"endpoint\":\"\",\"accesskey\":\"\",\"secretkey\":\"\"},\"qiniu\":{\"region\":\"\\u534e\\u4e1c\",\"is_https\":\"http\",\"bucket\":\".com\",\"domain\":\"1\",\"accesskey\":\"\",\"secretkey\":\"\"}}', '文件上传相关参数', 'upload');
 INSERT INTO `z_config` VALUES ('18', 'web_logo', 'logo1/20180809\\ddea7479fdbf2798610f95bad78cf3cd.jpg', '网站logo', 'base');
 INSERT INTO `z_config` VALUES ('19', 'upload_size', '2', '上传大小,单位MB', 'upload');
 INSERT INTO `z_config` VALUES ('20', 'ali_sms_access_key', 'LTAIKS2', '阿里云SMS短信 access_key', 'base');

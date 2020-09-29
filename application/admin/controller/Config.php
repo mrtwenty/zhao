@@ -75,7 +75,24 @@ class Config extends Base
         }
 
         $config = Db::name('Config')->where('c_type', 'upload')->column('c_value', 'c_key');
-        $params = unserialize($config['upload_params']);
+        $params = json_decode($config['upload_params'], true);
+        // $params = [
+        //     'oss'   => [
+        //         'is_https'  => 'http',
+        //         'bucket'    => '',
+        //         'endpoint'  => '',
+        //         'accesskey' => '',
+        //         'secretkey' => '',
+        //     ],
+        //     'qiniu' => [
+        //         'region'    => '华东',
+        //         'is_https'  => 'http',
+        //         'bucket'    => '.com',
+        //         'domain'    => '1',
+        //         'accesskey' => '',
+        //         'secretkey' => '',
+        //     ],
+        // ];
 
         $this->assign('qiniu', $params['qiniu']);
         $this->assign('oss', $params['oss']);

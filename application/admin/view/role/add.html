@@ -18,7 +18,7 @@
     <div class="layui-input-block">
         <button class="layui-btn" lay-submit lay-filter="roleForm">立即提交</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        <a href="{:url2('role/index')}" class="layui-btn layui-btn-primary">返回</a>
+        <a href="{:url('role/index')}" class="layui-btn layui-btn-primary">返回</a>
     </div>
   </div>
 </form>
@@ -33,7 +33,7 @@
             layer = layui.layer;
 
         var url  = location.pathname;
-        var succ = "{:url2('role/index')}";
+        var succ = "{:url('role/index')}";
         var flag=false;
 
         //监听提交

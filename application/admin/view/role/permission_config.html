@@ -31,7 +31,7 @@
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="roleForm">立即提交</button>
                 <button type="button" class="layui-btn layui-btn-primary reset">重置</button>
-                <a href="{:url2('role/index')}" class="layui-btn layui-btn-primary">返回</a>
+                <a href="{:url('role/index')}" class="layui-btn layui-btn-primary">返回</a>
             </div>
         </div>
     </form>
@@ -44,7 +44,7 @@ layui.use(['form','jquery','layer'], function(){
         form = layui.form;
         permission_list={$permission_list},
         url  = location.pathname,
-        succ = "{:url2('role/index')}";
+        succ = "{:url('role/index')}";
 
     form.on('checkbox(level-1)', function(data){
         $(data.elem).parent().next().find('input').prop('checked',data.elem.checked);
